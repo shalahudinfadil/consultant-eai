@@ -28,6 +28,7 @@ class LoginController extends Controller
             return redirect('/home');
           }
         }
+        return redirect('/')->with('status','oioi');
       } else {
         return redirect('/')->with('status','Invalid EID or Password!');
       }

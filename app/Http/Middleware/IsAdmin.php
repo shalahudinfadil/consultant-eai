@@ -16,7 +16,7 @@ class IsAdmin
      */
     public function handle($request, Closure $next)
     {
-      if (! $request->expectsJson()) {
+      if (!Auth::check()) {
         return redirect('/');
       } else {
         if (Auth::user()->role_id == 1) {
