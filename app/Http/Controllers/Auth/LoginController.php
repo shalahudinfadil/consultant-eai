@@ -7,6 +7,7 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use JD\Cloudder\Facades\Cloudder;
 
 class LoginController extends Controller
 {
@@ -21,7 +22,7 @@ class LoginController extends Controller
           if (Auth::user()->last_login == null) {
             return redirect('/promptpassword');
           } else {
-            $user = User::where('eid',Auth::user()->eid)->get();
+            $user = User::where('eid',Auth::user()->eid)->first();
             $user->last_login = Carbon::now()->toDateTimeString();
             $user->save();
 
@@ -49,5 +50,24 @@ class LoginController extends Controller
 
       return redirect('/home');
     }
+
+    public function uploadImages(Request $request)
+   {
+       $this->validate($request,[
+           'image_name'=>'required|mimes:jpeg,bmp,jpg,png|between:1, 6000',
+       ]);
+
+       $image_name = $request->file('image_name')->getRealPath();;
+
+       Cloudder::upload($image_name, 'img1');
+
+       return redirect()->back()->with('status', 'Image Uploaded Successfully');
+
+   }
+
+   public function show()
+   {
+     return Cloudder::secureShow('img1');
+   }
 
 }

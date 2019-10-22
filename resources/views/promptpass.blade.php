@@ -42,7 +42,7 @@
               @csrf
               <div class="form-group">
                 <label for="eid">New Password</label>
-                <input type="password" name="eid" class="form-control" placeholder="New Password">
+                <input type="password" name="password" class="form-control" placeholder="New Password">
               </div>
               <div class="form-group">
                 <label for="password">Retype New Password</label>

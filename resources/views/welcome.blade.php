@@ -49,6 +49,11 @@
               </div>
               <button type="submit" class="btn btn-primary">Submit</button>
             </form>
+            {{-- <form action="/upload" method="post" enctype="multipart/form-data">
+              @csrf
+              <input type="file" name="image_name" class="form-control" id="name" value="">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form> --}}
           </div>
         </div>
       </div>

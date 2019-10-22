@@ -93,10 +93,6 @@
           sub.prop('disabled',true);
         }
       });
-
-      $('#submodule').on('change', function(){
-        alert($(this).val());
-      });
     });
   </script>
 @endpush

@@ -18,6 +18,9 @@ Route::get('/', function () {
 Route::view('/promptpassword','promptpass');
 Route::post('/promptpassword','Auth\LoginController@promptPassword');
 
+Route::post('/upload','Auth\LoginController@uploadImages');
+Route::get('/show','Auth\LoginController@show');
+
 Route::post('/auth', 'Auth\LoginController@authenticate');
 Route::get('/logout', 'Auth\LoginController@logout')->middleware('227');
 
