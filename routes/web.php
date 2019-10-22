@@ -15,8 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::view('/promptpassword','promptpass');
+Route::post('/promptpassword','Auth\LoginController@promptPassword');
+
 Route::post('/auth', 'Auth\LoginController@authenticate');
-Route::get('/logout', 'Auth\LoginController@logout');
+Route::get('/logout', 'Auth\LoginController@logout')->middleware('227');
 
 //Admin routes
 Route::get('/dashboard', 'AdminController@dashboard');
@@ -36,3 +39,6 @@ Route::post('/client/add','AdminController@clientStore');
 Route::get('/module', 'AdminController@moduleIndex');
 Route::view('module/add', 'admin.module.add');
 Route::post('/module/add', 'AdminController@moduleStore');
+
+//Consultant Routes
+Route::get('/home','ConsultantController@index');
