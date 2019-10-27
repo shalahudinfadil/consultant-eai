@@ -113,15 +113,17 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js" integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js" integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     </head>
     <body>
       <div class="sidebar-container">
         <div class="sidebar-logo">
-          {{Auth::user()->name}}
+          {{Auth::user()->eid}}
+
           <br>
           <small>
-            {{Auth::user()->eid}}
+            {{Auth::user()->name}}
             <br>
             {{Auth::user()->assignments->modul_id}} - {{Auth::user()->assignments->submodul_id}}
           </small>
@@ -151,7 +153,7 @@
           </li>
           <li class="header">Account</li>
           <li>
-            <a href="/adminSetting">
+            <a href="/settings">
               <i class="fa fa-cogs" aria-hidden="true"></i> Settings
             </a>
           </li>

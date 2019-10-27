@@ -51,7 +51,12 @@
                       {{$sub->id}} - {{$sub->name}} <br>
                     @endforeach
                   </td>
-                  <td> <a href="/module/{{$value->eid}}"><i class="fa fa-cog" aria-hidden="true"></i></a> </td>
+                  <td>
+                    <a href="/module/{{$value->id}}/edit" class="btn btn-sm btn-info">
+                      <i class="fa fa-cogs" aria-hidden="true"></i>
+                       Options
+                    </a>
+                  </td>
                 </tr>
               @endforeach
             </tbody>

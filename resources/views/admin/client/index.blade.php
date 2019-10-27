@@ -35,7 +35,7 @@
             <tr>
               <th>ID</th>
               <th>Name</th>
-              <th>Settings</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -43,7 +43,16 @@
               <tr>
                 <td>{{$value->id}}</td>
                 <td>{{$value->name}}</td>
-                <td> <a href="/client/{{$value->eid}}/edit"><i class="fa fa-cog" aria-hidden="true"></i></a> </td>
+                <td>
+                  <a href="/client/{{$value->id}}/edit" class="btn btn-sm btn-info">
+                    <i class="fa fa-cogs" aria-hidden="true"></i>
+                     Options
+                  </a>
+                  <a href="/client/{{$value->id}}/delete" class="btn btn-sm btn-danger">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                     Delete
+                  </a>
+                </td>
               </tr>
             @endforeach
           </tbody>
@@ -51,7 +60,7 @@
             <tr>
               <th>ID</th>
               <th>Name</th>
-              <th>Setting</th>
+              <th>Action</th>
             </tr>
           </tfoot>
         </table>

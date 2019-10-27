@@ -27,21 +27,33 @@ Route::get('/logout', 'Auth\LoginController@logout')->middleware('227');
 //Admin routes
 Route::get('/dashboard', 'AdminController@dashboard');
 
+//Admin chart ajax
+Route::get('/dashboard/chartdata', 'AdminController@getChartData');
+
 //Admin routes - Consultant
 Route::get('/consultant', 'AdminController@consultantIndex');
 Route::get('/consultant/add', 'AdminController@consultantAdd');
 Route::get('/consultant/add/{modul_id}', 'AdminController@getSubmodules');
 Route::post('/consultant/add', 'AdminController@consultantStore');
+Route::get('/consultant/{eid}/deactivate','AdminController@consultantDeactivate');
+Route::get('/consultant/{eid}/edit','AdminController@consultantOptions');
+Route::put('/consultant/{eid}','AdminController@consultantUpdate');
+Route::get('/consultant/{eid}/reset','AdminController@consultantResetPassword');
 
 //Admin routes - Clients
 Route::get('/client','AdminController@clientIndex');
 Route::view('/client/add','admin.client.add');
 Route::post('/client/add','AdminController@clientStore');
+Route::get('/client/{id}/edit','AdminController@clientOptions');
+Route::put('/client/{id}','AdminController@clientUpdate');
+Route::get('/client/{id}/delete','AdminController@clientDelete');
 
 //Admin - Module
 Route::get('/module', 'AdminController@moduleIndex');
 Route::view('module/add', 'admin.module.add');
 Route::post('/module/add', 'AdminController@moduleStore');
+Route::get('/module/{id}/edit','AdminController@moduleOptions');
+Route::put('/module/{id}','AdminController@moduleUpdate');
 
 //Consultant Routes
 Route::get('/home','ConsultantController@index');

@@ -43,8 +43,14 @@ class LoginController extends Controller
 
     public function promptPassword(Request $req)
     {
+      $pass = $req->newpassword;
+      $validated = $req->validate([
+        'newpassword' => 'required|min:8',
+        'confirmpassword' => 'required|min:8|in:'.$pass,
+      ]);
+
       $user = User::where('eid',Auth::user()->eid)->first();
-      $user->password = bcrypt($req->password);
+      $user->password = bcrypt($req->confirmpassword);
       $user->last_login = Carbon::now()->toDateTimeString();
       $user->save();
 

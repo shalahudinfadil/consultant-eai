@@ -25,4 +25,9 @@ class Assignment extends Model
     {
       return $this->belongsTo('App\SubModul','submodul_id');
     }
+
+    public function scopeOfConsultant($query,$eid)
+    {
+      return $query->where('eid',$eid);
+    }
 }

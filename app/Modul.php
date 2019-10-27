@@ -20,4 +20,14 @@ class Modul extends Model
     {
       return $this->hasMany('App\Assignment','modul_id');
     }
+
+    public function tickets()
+    {
+      return $this->hasMany('App\Ticket','modul_id');
+    }
+
+    public function scopeOfModule($query,$id)
+    {
+      return $query->where('id',$id)->with('submoduls');
+    }
 }

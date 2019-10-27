@@ -26,8 +26,6 @@
               </a>
           </div>
         </div>
-
-
       </div>
       <div class="card-body">
         <table class="table table-bordered my-5" width="100%" id="consultant_table">
@@ -37,7 +35,7 @@
               <th>Name</th>
               <th>Module</th>
               <th>Submodule</th>
-              <th>Setting</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -47,7 +45,12 @@
                 <td>{{$value->name}}</td>
                 <td>{{$value->assignments->moduls->name}}</td>
                 <td>{{$value->assignments->submoduls->name}}</td>
-                <td> <a href="/consultant/{{$value->eid}}/edit"><i class="fa fa-cog" aria-hidden="true"></i></a> </td>
+                <td>
+                  <a href="/consultant/{{$value->eid}}/edit" class="btn btn-sm btn-info">
+                    <i class="fa fa-cogs" aria-hidden="true"></i>
+                     Options
+                  </a>
+                </td>
               </tr>
             @endforeach
           </tbody>
@@ -57,13 +60,66 @@
               <th>Name</th>
               <th>Module</th>
               <th>Submodule</th>
-              <th>Setting</th>
+              <th>Action</th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="card text-center mt-5">
+      <div class="card-header">
+        <h3>Deactivated Consultant</h3>
+      </div>
+      <div class="card-body">
+        <table class="table table-bordered my-5" width="100%" id="consultant_table">
+          <thead>
+            <tr>
+              <th>EID</th>
+              <th>Name</th>
+              <th>Module</th>
+              <th>Submodule</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach ($deactivated as $value)
+              <tr>
+                <td>{{$value->eid}}</td>
+                <td>{{$value->name}}</td>
+                <td>{{$value->assignments->moduls->name}}</td>
+                <td>{{$value->assignments->submoduls->name}}</td>
+                <td>
+                  <a href="/consultant/{{$value->eid}}/edit" class="btn btn-sm btn-info">
+                    <i class="fa fa-cogs" aria-hidden="true"></i>
+                     Reactivate
+                  </a>
+                  <br><br>
+                  <a href="/consultant/{{$value->eid}}/edit" class="btn btn-sm btn-info">
+                    <i class="fa fa-cogs" aria-hidden="true"></i>
+                     Delete
+                  </a>
+                </td>
+              </tr>
+            @endforeach
+          </tbody>
+          <tfoot>
+            <tr>
+              <th>EID</th>
+              <th>Name</th>
+              <th>Module</th>
+              <th>Submodule</th>
+              <th>Action</th>
             </tr>
           </tfoot>
         </table>
       </div>
     </div>
   </div>
+    @component('admin.confirmation_modal')
+      <p id="modal"></p>
+    @endcomponent
 @endsection
 
 @push('script')

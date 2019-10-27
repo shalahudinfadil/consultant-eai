@@ -20,4 +20,10 @@ class Submodul extends Model
     {
       return $this->hasMany('App\Assignment','submodul_id');
     }
+
+    public function tickets()
+    {
+      return $this->hasMany('App\Ticket','submodul_id');
+    }
+    
 }
