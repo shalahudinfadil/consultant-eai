@@ -23,7 +23,7 @@ class Assignment extends Model
 
     public function submoduls()
     {
-      return $this->belongsTo('App\SubModul','submodul_id');
+      return $this->belongsTo('App\Submodul','submodul_id');
     }
 
     public function scopeOfConsultant($query,$eid)
