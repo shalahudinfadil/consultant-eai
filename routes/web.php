@@ -55,5 +55,13 @@ Route::post('/module/add', 'AdminController@moduleStore');
 Route::get('/module/{id}/edit','AdminController@moduleOptions');
 Route::put('/module/{id}','AdminController@moduleUpdate');
 
+//Admin - Settings
+Route::get('/settings','AdminController@settingsIndex');
+Route::post('/settings/{eid}','AdminController@settingsUpdatePassword');
+
 //Consultant Routes
-Route::get('/home','ConsultantController@index');
+Route::get('/overview','ConsultantController@index');
+
+//Consultant routes - Ticket
+Route::get('/ticket','ConsultantController@ticketIndex');
+Route::get('/ticket/{id}/view','ConsultantController@ticketView');

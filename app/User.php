@@ -65,22 +65,23 @@ class User extends Authenticatable
     public function lastLogin()
     {
       if ($this->last_login != null) {
-        $carbonizedLastLogin = Carbon::instance($this->last_login)->setTimezone('Asia/Jakarta');
-        switch ($carbonizedLastLogin->diffInDays(Carbon::now())) {
-          //today
-          case 0:
-            $lastLogin = $carbonizedLastLogin->format('h:i A');
-            break;
-
-          case 1:
-            $lastLogin = 'Yesterday';
-
-          default:
-            $lastLogin = $carbonizedLastLogin->format('d/m/Y');
-            break;
-        }
-
-        return $lastLogin;
+        return Carbon::instance($this->last_login)->setTimezone('Asia/Jakarta')->format("H:i, d F Y");
+        // $carbonizedLastLogin = Carbon::instance($this->last_login)->setTimezone('Asia/Jakarta');
+        // switch (Carbon::now()->diffInDays($carbonizedLastLogin)) {
+        //   //today
+        //   case 0:
+        //     $lastLogin = $carbonizedLastLogin->format("H:i, d F Y");
+        //     break;
+        //
+        //   case 1:
+        //     $lastLogin = 'Yesterday';
+        //
+        //   default:
+        //     $lastLogin = $carbonizedLastLogin->format('d/m/Y');
+        //     break;
+        // }
+        //
+        // return $lastLogin;
       }
 
       return 'Hasn\'t Login Yet';

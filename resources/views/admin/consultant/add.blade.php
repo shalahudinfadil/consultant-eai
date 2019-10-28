@@ -33,19 +33,19 @@
           <div class="form-group row">
            <label for="eid" class="col-sm-2 col-form-label">EID</label>
            <div class="col-sm-10">
-             <input type="text" class="form-control" placeholder="EID" name="eid">
+             <input type="text" class="form-control" placeholder="EID" name="eid" required>
            </div>
          </div>
          <div class="form-group row">
           <label for="eid" class="col-sm-2 col-form-label">Name</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" placeholder="Name" name="name">
+            <input type="text" class="form-control" placeholder="Name" name="name" required>
           </div>
         </div>
         <div class="form-group row">
          <label for="eid" class="col-sm-2 col-form-label">Module</label>
          <div class="col-sm-10">
-           <select class="form-control" name="module" id="module">
+           <select class="form-control" name="module" id="module" required>
              <option>--Select Module--</option>
              @foreach ($modul as $value)
                <option value="{{$value->id}}">{{$value->name}}</option>
@@ -56,7 +56,7 @@
        <div class="form-group row">
         <label for="eid" class="col-sm-2 col-form-label">Submodule</label>
         <div class="col-sm-10">
-          <select class="form-control" name="submodule" id="submodule" disabled>
+          <select class="form-control" name="submodule" id="submodule" disabled required>
           </select>
         </div>
       </div>

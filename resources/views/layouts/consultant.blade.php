@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Consultant | @yield('title')</title>
+        <title>@yield('title') | Consultant</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -18,7 +18,14 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" integrity="sha256-aa0xaJgmK/X74WM224KMQeNQC2xYKwlAt08oZqjeF0E=" crossorigin="anonymous" />
 
+        <!-- Our Custom CSS -->
+<link rel="stylesheet" href="style2.css">
+<!-- Scrollbar Custom CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+
         <style>
+
+
         .sidebar-container {
           position: fixed;
           width: 220px;
@@ -103,6 +110,7 @@
         .content-container {
           padding-left: 220px;
         }
+
         </style>
 
         <!-- Scripts -->
@@ -117,6 +125,9 @@
 
     </head>
     <body>
+    <div class="wrapper">
+    <!-- Sidebar -->
+      <nav id="sidebar">
       <div class="sidebar-container">
         <div class="sidebar-logo">
           {{Auth::user()->eid}}
@@ -131,26 +142,27 @@
         <ul class="sidebar-navigation">
           <li class="header"></li>
           <li>
-            <a href="/home">
-              <i class="fa fa-home" aria-hidden="true"></i> Home
+            <a href="/overview">
+              <i class="fa fa-tachometer" aria-hidden="true"></i> Overview
             </a>
           </li>
-          <li class="header">Team</li>
           <li>
-            <a href="/consultant">
-              <i class="fa fa-users" aria-hidden="true"></i> Consultants
+            <a href="/ticket">
+              <i class="fa fa-ticket" aria-hidden="true"></i> Ticket
             </a>
           </li>
+          {{-- <li class="header">Ticket</li>
+
           <li>
             <a href="/client">
-              <i class="fa fa-building-o" aria-hidden="true"></i> Clients
+              <i class="fa fa-building-o" aria-hidden="true"></i> Working
             </a>
           </li>
           <li>
             <a href="/module">
-              <i class="fa fa-folder" aria-hidden="true"></i></i> Modules
+              <i class="fa fa-folder" aria-hidden="true"></i></i> Closed
             </a>
-          </li>
+          </li> --}}
           <li class="header">Account</li>
           <li>
             <a href="/settings">
@@ -174,5 +186,14 @@
       </div>
 
       @stack('script')
+      <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <!-- jQuery Custom Scroller CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
     </body>
 </html>

@@ -148,7 +148,7 @@
           </li>
           <li class="header">Account</li>
           <li>
-            <a href="/adminSetting">
+            <a href="/settings">
               <i class="fa fa-cogs" aria-hidden="true"></i> Settings
             </a>
           </li>

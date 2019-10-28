@@ -79,6 +79,8 @@
 
 @push('script')
   <script type="text/javascript">
+  var chartTimeout;
+
   var ctxModule = $('#chartTicketModule');
   var ctxPriority = $('#chartTicketPriority');
   var ctxStatus = $('#chartTicketStatus');
@@ -98,6 +100,21 @@
           dataset.data.pop();
       });
       chart.update();
+  }
+
+  function getData(chartArray) {
+    $.get('/dashboard/chartdata', function(resp){
+      $.each(chartArray, function(i,v){
+        addData(
+          v,
+          resp[i]['labels'],
+          resp[i]['data']
+        );
+        chartTimeout = setTimeout(function(){
+          getData(chartArray);
+        }, 300000);
+      });
+    });
   }
 
   $(document).ready(function () {
@@ -175,27 +192,13 @@
         }
     });
 
-    $.ajax({
-      url: '/dashboard/chartdata',
-      success: function(resp) {
-        addData(
-          chartTicketModule,
-          resp['module']['labels'],
-          resp['module']['data']
-        );
-        addData(
-          chartTicketPriority,
-          resp['priority']['labels'],
-          resp['priority']['data']
-        );
-        addData(
-          chartTicketStatus,
-          resp['status']['labels'],
-          resp['status']['data']
-        );
-      }
-    });
+    var chartArray = [
+      chartTicketModule,
+      chartTicketPriority,
+      chartTicketStatus,
+    ];
 
+    getData(chartArray);
 
   });
   </script>

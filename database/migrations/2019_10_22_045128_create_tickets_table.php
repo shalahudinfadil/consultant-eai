@@ -22,6 +22,7 @@ class CreateTicketsTable extends Migration
             $table->unsignedInteger('client_id');
             $table->foreign('client_id')->references('id')->on('clients')->onUpdate('cascade')->onDelete('cascade');
             $table->string('PIC');
+            $table->string('title');
             $table->text('message');
             $table->integer('priority');
             $table->json('img_links');

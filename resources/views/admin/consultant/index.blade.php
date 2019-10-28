@@ -117,9 +117,6 @@
       </div>
     </div>
   </div>
-    @component('admin.confirmation_modal')
-      <p id="modal"></p>
-    @endcomponent
 @endsection
 
 @push('script')

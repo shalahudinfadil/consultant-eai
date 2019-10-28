@@ -54,15 +54,10 @@ class AdminController extends Controller
         $ticketStatus['data'][] = $ticket->groupby('status')[$status]->count();
       }
 
-      // $ticketOpening = [];
-      // foreach ( as $key => $value) {
-      //   // code...
-      // }
-
       $ticketArray = [
-        'module' => $ticketModule,
-        'priority' => $ticketPriority,
-        'status' => $ticketStatus,
+        $ticketModule,
+        $ticketPriority,
+        $ticketStatus,
       ];
 
       return $ticketArray;
@@ -288,4 +283,25 @@ class AdminController extends Controller
     //Module - END
 
     //Setting - START
+
+    public function settingsIndex()
+    {
+      return view('admin.settings');
+    }
+
+    public function settingsUpdatePassword(Request $req, $eid)
+    {
+
+      $validated = $req->validate([
+        'newpassword' => 'required|min:8',
+        'confirmpassword' => 'required|min:8|in:'.$req->newpassword,
+      ]);
+
+      User::where('eid',$eid)->update([
+        'password' => bcrypt($req->confirmpassword),
+      ]);
+
+      return redirect('/settings');
+
+    }
 }

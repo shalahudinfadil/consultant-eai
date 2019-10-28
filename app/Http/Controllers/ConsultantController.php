@@ -26,11 +26,29 @@ class ConsultantController extends Controller
                     })
                   ->get();
 
+
+
+      return view('consultant.overview', compact('members'));
+    }
+
+    //Ticket - START
+
+    public function ticketIndex()
+    {
       $tickets = Ticket::OfSubmodule(Auth::user()->assignments->submodul_id)
                           ->with('clients')
                           ->orderBy('created_at','desc')
                           ->get();
 
-      return view('consultant.home', compact('members'))->with('tickets',$tickets);
+      return view('consultant.ticket', compact('tickets'));
     }
+
+    public function ticketView($id)
+    {
+      $ticket = Ticket::find($id);
+
+      return view('consultant.ticket.view', compact('ticket'));
+    }
+
+    //Ticket - END
 }

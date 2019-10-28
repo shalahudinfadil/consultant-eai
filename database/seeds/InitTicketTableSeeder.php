@@ -28,9 +28,7 @@ class InitTicketTableSeeder extends Seeder
           $images_count = $faker->numberBetween(1,10);
 
           foreach (range(1,$images_count) as $imgKey => $img) {
-            $images[] = [
-              $imgKey => 'https://placeimg.com/420/320/tech',
-            ];
+            $images[] = "https://placeimg.com/420/320/tech";
           }
 
           $priority = ($value % 8 == 0) ? 3 : (($value % 2 == 0) ? 2 : 1);
@@ -41,7 +39,8 @@ class InitTicketTableSeeder extends Seeder
             'submodul_id' => $submodul->id,
             'client_id' => $faker->numberBetween(1,20),
             'PIC' => $faker->firstName." ".$faker->lastName,
-            'message' => $faker->bs,
+            'title' => $faker->bs,
+            'message' => $faker->realText(500,5),
             'priority' => $priority,
             'img_links' => json_encode($images),
             'status' => $status,

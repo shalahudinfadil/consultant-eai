@@ -26,7 +26,7 @@ class LoginController extends Controller
             $user->last_login = Carbon::now()->toDateTimeString();
             $user->save();
 
-            return redirect('/home');
+            return redirect('/overview');
           }
         }
         return redirect('/')->with('status','oioi');

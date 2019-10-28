@@ -40,22 +40,39 @@ class Ticket extends Model
       return $query->where('submodul_id',$id);
     }
 
-    // public function ticketPriority()
-    // {
-    //   switch ($this->priority) {
-    //     case 1 :
-    //       return '';
-    //       break;
-    //
-    //     case 1 :
-    //       // code...
-    //       break;
-    //
-    //     default:
-    //       // code...
-    //       break;
-    //   }
-    // }
+    public function priority()
+    {
+      switch ($this->priority) {
+        case 1 :
+          return '<span class="badge badge-pill badge-success p-1">Low</span>';
+          break;
+
+        case 2 :
+          return '<span class="badge badge-pill badge-warning p-1">Medium</span>';
+          break;
+
+        default:
+          return '<span class="badge badge-pill badge-danger p-1">High</span>';
+          break;
+      }
+    }
+
+    public function status()
+    {
+      switch ($this->status) {
+        case 1 :
+          return 'Open';
+          break;
+
+        case 2 :
+          return 'Working';
+          break;
+
+        default:
+          return 'Closed';
+          break;
+      }
+    }
 
     public function scopeOpenTicket($query)
     {
