@@ -31,7 +31,7 @@ class LoginController extends Controller
         }
         return redirect('/')->with('status','oioi');
       } else {
-        return redirect('/')->with('status','Invalid EID or Password!');
+        return redirect('/')->withError('Invalid EID or Password!');
       }
     }
 
@@ -67,7 +67,7 @@ class LoginController extends Controller
 
        Cloudder::upload($image_name, 'img1');
 
-       return redirect()->back()->with('status', 'Image Uploaded Successfully');
+       return redirect()->back()->withSuccess('Image Uploaded Successfully');
 
    }
 

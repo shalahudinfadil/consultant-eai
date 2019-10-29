@@ -15,53 +15,56 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::view('/promptpassword','promptpass');
-Route::post('/promptpassword','Auth\LoginController@promptPassword');
+Route::middleware(['admin','227'])->group(function(){
+  Route::view('/promptpassword','promptpass');
+  Route::post('/promptpassword','Auth\LoginController@promptPassword');
 
-Route::post('/upload','Auth\LoginController@uploadImages');
-Route::get('/show','Auth\LoginController@show');
+  Route::post('/upload','Auth\LoginController@uploadImages');
+  Route::get('/show','Auth\LoginController@show');
 
-Route::post('/auth', 'Auth\LoginController@authenticate');
-Route::get('/logout', 'Auth\LoginController@logout')->middleware('227');
+  Route::post('/auth', 'Auth\LoginController@authenticate');
+  Route::get('/logout', 'Auth\LoginController@logout')->middleware('227');
 
-//Admin routes
-Route::get('/dashboard', 'AdminController@dashboard');
+  //Admin routes
+  Route::get('/dashboard', 'AdminController@dashboard');
 
-//Admin chart ajax
-Route::get('/dashboard/chartdata', 'AdminController@getChartData');
+  //Admin chart ajax
+  Route::get('/dashboard/chartdata', 'AdminController@getChartData');
 
-//Admin routes - Consultant
-Route::get('/consultant', 'AdminController@consultantIndex');
-Route::get('/consultant/add', 'AdminController@consultantAdd');
-Route::get('/consultant/add/{modul_id}', 'AdminController@getSubmodules');
-Route::post('/consultant/add', 'AdminController@consultantStore');
-Route::get('/consultant/{eid}/deactivate','AdminController@consultantDeactivate');
-Route::get('/consultant/{eid}/edit','AdminController@consultantOptions');
-Route::put('/consultant/{eid}','AdminController@consultantUpdate');
-Route::get('/consultant/{eid}/reset','AdminController@consultantResetPassword');
+  //Admin routes - Consultant
+  Route::get('/consultant', 'AdminController@consultantIndex');
+  Route::get('/consultant/add', 'AdminController@consultantAdd');
+  Route::get('/consultant/add/{modul_id}', 'AdminController@getSubmodules');
+  Route::post('/consultant/add', 'AdminController@consultantStore');
+  Route::get('/consultant/{eid}/deactivate','AdminController@consultantDeactivate');
+  Route::get('/consultant/{eid}/edit','AdminController@consultantOptions');
+  Route::put('/consultant/{eid}','AdminController@consultantUpdate');
+  Route::get('/consultant/{eid}/reset','AdminController@consultantResetPassword');
 
-//Admin routes - Clients
-Route::get('/client','AdminController@clientIndex');
-Route::view('/client/add','admin.client.add');
-Route::post('/client/add','AdminController@clientStore');
-Route::get('/client/{id}/edit','AdminController@clientOptions');
-Route::put('/client/{id}','AdminController@clientUpdate');
-Route::get('/client/{id}/delete','AdminController@clientDelete');
+  //Admin routes - Clients
+  Route::get('/client','AdminController@clientIndex');
+  Route::view('/client/add','admin.client.add');
+  Route::post('/client/add','AdminController@clientStore');
+  Route::get('/client/{id}/edit','AdminController@clientOptions');
+  Route::put('/client/{id}','AdminController@clientUpdate');
+  Route::get('/client/{id}/delete','AdminController@clientDelete');
 
-//Admin - Module
-Route::get('/module', 'AdminController@moduleIndex');
-Route::view('module/add', 'admin.module.add');
-Route::post('/module/add', 'AdminController@moduleStore');
-Route::get('/module/{id}/edit','AdminController@moduleOptions');
-Route::put('/module/{id}','AdminController@moduleUpdate');
+  //Admin - Module
+  Route::get('/module', 'AdminController@moduleIndex');
+  Route::view('module/add', 'admin.module.add');
+  Route::post('/module/add', 'AdminController@moduleStore');
+  Route::get('/module/{id}/edit','AdminController@moduleOptions');
+  Route::put('/module/{id}','AdminController@moduleUpdate');
 
-//Admin - Settings
-Route::get('/settings','AdminController@settingsIndex');
-Route::post('/settings/{eid}','AdminController@settingsUpdatePassword');
+  //Admin - Settings
+  Route::get('/settings','AdminController@settingsIndex');
+  Route::post('/settings/{eid}','AdminController@settingsUpdatePassword');
 
-//Consultant Routes
-Route::get('/overview','ConsultantController@index');
+  //Consultant Routes
+  Route::get('/overview','ConsultantController@index');
 
-//Consultant routes - Ticket
-Route::get('/ticket','ConsultantController@ticketIndex');
-Route::get('/ticket/{id}/view','ConsultantController@ticketView');
+  //Consultant routes - Ticket
+  Route::get('/ticket','ConsultantController@ticketIndex');
+  Route::get('/ticket/{id}/view','ConsultantController@ticketView');
+
+});

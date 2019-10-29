@@ -14,10 +14,6 @@ use App\Ticket;
 
 class AdminController extends Controller
 {
-    public function __construct()
-    {
-      $this->middleware('admin');
-    }
 
     public function dashboard()
     {
@@ -108,7 +104,7 @@ class AdminController extends Controller
         return redirect()->back()->with('status', $e->getMessage());
       }
 
-      return redirect('/consultant')->with('status','Consultant Successfully Added!');
+      return redirect('/consultant')->withSuccess('Consultant Successfully Added!');
     }
 
     public function consultantOptions($eid)
@@ -136,14 +132,14 @@ class AdminController extends Controller
         return redirect()->back()->with('status','EID has been taken');
       }
 
-      return redirect('/consultant')->with('status','Data has been updated!');
+      return redirect('/consultant')->withSuccess('Data has been updated!');
     }
 
     public function consultantDeactivate($eid)
     {
       $consultant = User::consultant()->where('eid',$eid)->delete();
 
-      return redirect('/consultant')->with('status','Account '.$eid.' has been Deactivated');
+      return redirect('/consultant')->withSuccess('Account '.$eid.' has been Deactivated');
     }
 
     public function consultantResetPassword($eid)
@@ -153,7 +149,7 @@ class AdminController extends Controller
       $consultant->last_login = null;
       $consultant->save();
 
-      return redirect()->back()->with('status','Password has been reset');
+      return redirect()->back()->withSucess('Password has been reset');
     }
 
     //Consultant - END
@@ -175,7 +171,7 @@ class AdminController extends Controller
         return redirect()->back()->with('status', $e->getMessage());
       }
 
-      return redirect('/client')->with('status','Client Successfully Added');
+      return redirect('/client')->withSuccess('Client Successfully Added');
     }
 
     public function clientOptions($id)
@@ -194,13 +190,13 @@ class AdminController extends Controller
       } catch (\Illuminate\Database\QueryException $e) {
         return redirect()->back()->with('status', $e->getMessage());
       }
-      return redirect('/client')->with('status','Data Successfully Updated');
+      return redirect('/client')->withSuccess('Data Successfully Updated');
     }
 
     public function clientDelete($id)
     {
       Client::destroy($id);
-      return redirect('/client')->with('status','Data Successfully Deleted');
+      return redirect('/client')->withSuccess('Data Successfully Deleted');
     }
 
     //Client - end
@@ -277,7 +273,7 @@ class AdminController extends Controller
         return redirect()->back()->with('status',$e->getMessage());
       }
 
-      return redirect('/module')->with('status','Data has been updated!');
+      return redirect('/module')->withSucess('Data has been updated!');
     }
 
     //Module - END
@@ -301,7 +297,7 @@ class AdminController extends Controller
         'password' => bcrypt($req->confirmpassword),
       ]);
 
-      return redirect('/settings');
+      return redirect('/settings')->withSuccess('Password has been changed!');
 
     }
 }

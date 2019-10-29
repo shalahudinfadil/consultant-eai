@@ -40,4 +40,9 @@
       </tr>
     </table>
   </div>
+  <div class="col-md-8">
+    <a href="/ticket/change/".$this->
+      -
+    </a>
+  </div>
 @endsection

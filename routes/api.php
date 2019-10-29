@@ -14,7 +14,5 @@ use Illuminate\Http\Request;
 */
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+    Route::get('/modul/{modul_id?}','API\APIController@getModules');
 });
-
-Route::get('/modul/{modul_id?}','API\APIController@getModules');

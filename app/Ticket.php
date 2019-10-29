@@ -74,6 +74,23 @@ class Ticket extends Model
       }
     }
 
+    public function changeStatus()
+    {
+      switch ($this->status) {
+        case 1 :
+          return 'Working On';
+          break;
+
+        case 2 :
+          return 'Close';
+          break;
+
+        default:
+          return 'Closed';
+          break;
+      }
+    }
+
     public function scopeOpenTicket($query)
     {
       return $query->where('status',1);

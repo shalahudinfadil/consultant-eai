@@ -97,6 +97,7 @@
     </style>
 </head>
 <body>
+  @include('sweetalert::alert')
     <div class="container-login">
         <div class="row justify-content-center">
             <div class="col-md-12">
