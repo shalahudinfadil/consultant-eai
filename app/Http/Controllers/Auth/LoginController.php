@@ -54,7 +54,7 @@ class LoginController extends Controller
       $user->last_login = Carbon::now()->toDateTimeString();
       $user->save();
 
-      return redirect('/home');
+      return redirect('/overview');
     }
 
     public function uploadImages(Request $request)

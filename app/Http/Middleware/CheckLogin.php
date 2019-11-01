@@ -16,10 +16,10 @@ class CheckLogin
      */
     public function handle($request, Closure $next)
     {
-      if (!Auth::check()) {
-          return redirect('/');
+      if (Auth::check()) {
+          return $next($request);
       } else {
-        return $next($request);
+          return redirect('/')->withWarning('401 Unauthorized - Please Login First');
       }
     }
 }

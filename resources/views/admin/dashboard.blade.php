@@ -3,7 +3,7 @@
 @section('title','Dashboard')
 
 @section('content')
-<div class="col-md-12 text-center">
+<div class="col-md-12 text-center mb-5">
   <h2>Ticket</h2>
   <hr>
   <div class="row justify-content-center">
@@ -32,45 +32,15 @@
     <div class="col-md-12 mt-4">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">By Opening</h5>
-          <div class="btn-group btn-group-toggle mb-3" data-toggle="buttons">
-            <label class="btn btn-sm btn-info ">
-              <input type="radio" name="options" id="option1"> This Day
-            </label>
-            <label class="btn btn-sm btn-info ">
-              <input type="radio" name="options" id="option1"> This Week
-            </label>
-            <label class="btn btn-sm btn-info ">
-              <input type="radio" name="options" id="option1"> This Month
-            </label>
-            <label class="btn btn-sm btn-info ">
-              <input type="radio" name="options" id="option1"> This Quarter
-            </label>
-          </div>
-          <canvas id="chartTicketOpening" width="400" height="100"></canvas>
+          <h5 class="card-title">By Modules per Client</h5>
+          <canvas id="chartClientModule" width="400" height="200"></canvas>
         </div>
       </div>
-    </div>
-    <div class="col-md-12 mt-4">
-      <div class="card">
+      <div class="card mt-3">
         <div class="card-body">
-          <h5 class="card-title">By Closing</h5>
-          <canvas id="chartTicketClosing" width="300" height="300"></canvas>
+          <h5 class="card-title">By Priorities per Client</h5>
+          <canvas id="chartClientPriority" width="400" height="200"></canvas>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="">
-
-</div>
-<div class="col-md-12 text-center">
-  <h2>Client</h2>
-  <hr>
-  <div class="card-columns">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Client Number</h5>
       </div>
     </div>
   </div>
@@ -84,23 +54,31 @@
   var ctxModule = $('#chartTicketModule');
   var ctxPriority = $('#chartTicketPriority');
   var ctxStatus = $('#chartTicketStatus');
-  var ctxOpening = $('#chartTicketOpening');
+  var ctxClientModule = $('#chartClientModule');
+  var ctxClientPriority = $('#chartClientPriority');
 
-  function addData(chart, label, data) {
-      chart.data.labels = label;
+  function addData(chart, labels, data, label) {
+      chart.data.labels = labels;
+      var i = 0;
       chart.data.datasets.forEach((dataset) => {
+        if(label != null) {
+          dataset.data = data[i+1];
+          dataset.label = label[i];
+          i++;
+        } else {
           dataset.data = data;
+        }
       });
       chart.update();
   }
 
-  function removeData(chart) {
-      chart.data.labels.pop();
-      chart.data.datasets.forEach((dataset) => {
-          dataset.data.pop();
-      });
-      chart.update();
-  }
+  // function removeData(chart) {
+  //     chart.data.labels.pop();
+  //     chart.data.datasets.forEach((dataset) => {
+  //         dataset.data.pop();
+  //     });
+  //     chart.update();
+  // }
 
   function getData(chartArray) {
     $.get('/dashboard/chartdata', function(resp){
@@ -108,12 +86,13 @@
         addData(
           v,
           resp[i]['labels'],
-          resp[i]['data']
+          resp[i]['data'],
+          resp[i]['label']
         );
-        chartTimeout = setTimeout(function(){
-          getData(chartArray);
-        }, 300000);
       });
+      chartTimeout = setTimeout(function(){
+        getData(chartArray);
+      }, 300000);
     });
   }
 
@@ -158,26 +137,62 @@
       }
     });
 
-    var chartTicketOpening = new Chart(ctxOpening, {
+    var chartClientModule = new Chart(ctxClientModule, {
         type: 'bar',
         data: {
             labels: [],
             datasets: [{
-                label: 'Open',
+                label: '',
                 data: [],
-                backgroundColor: '#1c39bb',
+                backgroundColor: '#3e95cd',
             },{
-                label: 'Working',
+                label: '',
                 data: [],
-                backgroundColor: '#ff8c00',
+                backgroundColor: '#8e5ea2',
             },{
-                label: 'Closed',
+                label: '',
                 data: [],
-                backgroundColor: '#696969',
+                backgroundColor: '#3cba9f',
             },
           ]
         },
         options: {
+          responsive: true,
+          scales: {
+  					xAxes: [{
+  						stacked: true,
+  					}],
+  					yAxes: [{
+  						stacked: true,
+              ticks: {
+                  beginAtZero: true
+              }
+  					}],
+  				}
+        }
+    });
+
+    var chartClientPriority = new Chart(ctxClientPriority, {
+        type: 'bar',
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'Low',
+                data: [],
+                backgroundColor: '#32cd32',
+            },{
+                label: 'Medium',
+                data: [],
+                backgroundColor: '#f4c430',
+            },{
+                label: 'High',
+                data: [],
+                backgroundColor: '#b22222',
+            },
+          ]
+        },
+        options: {
+          responsive: true,
           scales: {
   					xAxes: [{
   						stacked: true,
@@ -196,6 +211,8 @@
       chartTicketModule,
       chartTicketPriority,
       chartTicketStatus,
+      chartClientModule,
+      chartClientPriority,
     ];
 
     getData(chartArray);

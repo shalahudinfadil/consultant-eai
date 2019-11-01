@@ -27,36 +27,58 @@ class AdminController extends Controller
     {
       $moduls = Modul::all();
       $submoduls = Submodul::all();
-      $ticket = Ticket::all();
+      $tickets = Ticket::all();
+      $clients = Client::all();
 
       $ticketModule = [];
       foreach ($moduls as $modul) {
         $ticketModule['labels'][] = $modul->id;
-        $ticketModule['data'][] = $ticket->groupby('modul_id')[$modul->id]->count();
+        $ticketModule['data'][] = $tickets->groupby('modul_id')[$modul->id]->count();
       }
 
 
       $ticketPriority = [
         'labels' => ["Low","Medium","High"],
       ];
-      foreach (range(1,3) as $priority) {
-        $ticketPriority['data'][] = $ticket->groupby('priority')[$priority]->count();
-      }
 
       $ticketStatus = [
         'labels' => ['Open','Working','Closed'],
       ];
-      foreach (range(1,3) as $status) {
-        $ticketStatus['data'][] = $ticket->groupby('status')[$status]->count();
+
+      $ticketClientPriority = [
+        'label' => ["Low", "Medium", "High"],
+      ];
+
+      foreach (range(1,3) as $counter) {
+        $ticketPriority['data'][] = $tickets->groupby('priority')[$counter]->count();
+        $ticketStatus['data'][] = $tickets->groupby('status')[$counter]->count();
       }
 
-      $ticketArray = [
+      foreach($moduls as $modul) {
+        $ticketClientModule['label'][] = $modul->name;
+      }
+
+      foreach ($clients as $key => $client) {
+        $ticketClientModule['labels'][] = $client->name;
+        $ticketClientPriority['labels'][] = $client->name;
+        $filtered = $tickets->groupby('client_id')[++$key];
+        foreach (range(1,3) as $counter) {
+          $ticketClientModule['data'][$counter][] =
+            (!empty($filtered->groupby('status')[$counter])) ? $filtered->groupby('status')[$counter]->count() : 0;
+          $ticketClientPriority['data'][$counter][] =
+            (!empty($filtered->groupby('priority')[$counter])) ? $filtered->groupby('priority')[$counter]->count() : 0;
+        }
+      }
+
+      $chartArray = [
         $ticketModule,
         $ticketPriority,
         $ticketStatus,
+        $ticketClientModule,
+        $ticketClientPriority,
       ];
 
-      return $ticketArray;
+      return $chartArray;
     }
 
     //chart ajax - END

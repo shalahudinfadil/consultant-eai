@@ -28,7 +28,7 @@
             <td>{{$ticket->status()}}</td>
             <td>{{$ticket->created_at}}</td>
             <td>
-              <a href="/ticket/{{$ticket->id}}/view" class="btn btn-sm btn-block btn-primary">
+              <a href="/ticket/{{$ticket->id}}" class="btn btn-sm btn-block btn-primary">
                 <i class="fa fa-eye" aria-hidden="true"></i> View
               </a>
             </td>

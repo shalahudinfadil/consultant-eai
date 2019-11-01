@@ -27,9 +27,8 @@ class CreateTicketsTable extends Migration
             $table->integer('priority');
             $table->json('img_links');
             $table->integer('status');
-            $table->timestamp('opening_time')->nullable();
-            $table->timestamp('working_time')->nullable();
-            $table->timestamp('closing_time')->nullable();
+            $table->timestamp('working_at')->nullable();
+            $table->timestamp('closing_at')->nullable();
             $table->timestamps();
         });
     }

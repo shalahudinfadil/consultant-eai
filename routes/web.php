@@ -15,15 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//auth things
+Route::post('/auth', 'Auth\LoginController@authenticate');
+Route::get('/logout', 'Auth\LoginController@logout')->middleware('227');
+
 Route::middleware(['admin','227'])->group(function(){
-  Route::view('/promptpassword','promptpass');
-  Route::post('/promptpassword','Auth\LoginController@promptPassword');
 
   Route::post('/upload','Auth\LoginController@uploadImages');
   Route::get('/show','Auth\LoginController@show');
-
-  Route::post('/auth', 'Auth\LoginController@authenticate');
-  Route::get('/logout', 'Auth\LoginController@logout')->middleware('227');
 
   //Admin routes
   Route::get('/dashboard', 'AdminController@dashboard');
@@ -57,14 +56,29 @@ Route::middleware(['admin','227'])->group(function(){
   Route::put('/module/{id}','AdminController@moduleUpdate');
 
   //Admin - Settings
-  Route::get('/settings','AdminController@settingsIndex');
-  Route::post('/settings/{eid}','AdminController@settingsUpdatePassword');
+  Route::get('/admin/settings','AdminController@settingsIndex');
+  Route::post('/admin/settings/{eid}','AdminController@settingsUpdatePassword');
+});
+
+Route::middleware(['check.login','227'])->group(function(){
+  //Prompt change password -First Time Login
+  Route::view('/promptpassword','promptpass');
+  Route::post('/promptpassword','Auth\LoginController@promptPassword');
 
   //Consultant Routes
   Route::get('/overview','ConsultantController@index');
+  Route::get('/activityfeed','ConsultantController@getActivityFeed');
+
+  //Consultant chart ajax
+  Route::get('/overview/chartdata','ConsultantController@getChartData');
 
   //Consultant routes - Ticket
   Route::get('/ticket','ConsultantController@ticketIndex');
-  Route::get('/ticket/{id}/view','ConsultantController@ticketView');
+  Route::get('/ticket/{id}','ConsultantController@ticketView');
+  Route::get('/ticket/{id}/changestatus','ConsultantController@ticketChangeStatus');
 
+  //Consultant routes - Settings
+  Route::view('/consultant/settings','consultant.settings');
+  Route::post('/consultant/settings/{eid}/password','ConsultantController@settingsChangePassword');
+  Route::post('/consultant/settings/{eid}/profile','ConsultantController@settingsUpdateProfile');
 });

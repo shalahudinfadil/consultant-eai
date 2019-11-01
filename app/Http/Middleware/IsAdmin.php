@@ -16,15 +16,10 @@ class IsAdmin
      */
     public function handle($request, Closure $next)
     {
-      if (!Auth::check()) {
-        return redirect('/')->withWarning('401 Unathourized - Please Login First');
+      if (Auth::check() && Auth::user()->role_id == 1) {
+        return $next($request);
       } else {
-        if (Auth::user()->role_id == 1) {
-          return $next($request);
-        } else {
-          return redirect()->back()->withWarning('Admin-Only Area');
-        }
+        return redirect()->back()->withWarning('Admin-Only Area');
       }
-
     }
 }

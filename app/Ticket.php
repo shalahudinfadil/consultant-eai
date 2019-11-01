@@ -40,6 +40,11 @@ class Ticket extends Model
       return $query->where('submodul_id',$id);
     }
 
+    public function scopeOfDate($query,$date)
+    {
+      return $query->whereDate('created_at',$date);
+    }
+
     public function priority()
     {
       switch ($this->priority) {
@@ -74,20 +79,18 @@ class Ticket extends Model
       }
     }
 
-    public function changeStatus()
+    public function changeStatusButton()
     {
       switch ($this->status) {
         case 1 :
-          return 'Working On';
+          return '<a href="/ticket/'.$this->id.'/changestatus" class="btn btn-block btn-primary">To Working</a>';
           break;
 
         case 2 :
-          return 'Close';
+          return '<a href="/ticket/'.$this->id.'/changestatus" class="btn btn-block btn-success">To Closed</a>';
           break;
-
-        default:
-          return 'Closed';
-          break;
+        case 3 :
+          return '<a href="#" class="btn btn-block btn-secondary disabled">Ticket Already Closed</a>';
       }
     }
 
@@ -116,7 +119,7 @@ class Ticket extends Model
       return $query->where('priority',2);
     }
 
-    public function scopehighTicket($query)
+    public function scopeHighTicket($query)
     {
       return $query->where('priority',3);
     }
