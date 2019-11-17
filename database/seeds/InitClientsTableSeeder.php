@@ -21,6 +21,7 @@ class InitClientsTableSeeder extends Seeder
         foreach (range(1,20) as $key => $value) {
           Client::create([
             'name' => $faker->company,
+            'client_token' => Str::random(40), 
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
           ]);

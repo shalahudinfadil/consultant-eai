@@ -31,18 +31,18 @@
         <form action="/client/{{$client->id}}" method="post">
           @csrf
           @method('PUT')
-         <div class="form-group row">
-          <label for="eid" class="col-sm-2 col-form-label">Name</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" value="{{$client->name}}" name="name" required>
+           <div class="form-group row">
+            <label for="eid" class="col-sm-2 col-form-label">Name</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" value="{{$client->name}}" name="name" required>
+            </div>
+            <div class="col-md-10 offset-md-2 pt-3">
+              <button type="submit" class="btn btn-success" style="width:100%">Update Client</button>
+            </div>
           </div>
-        </div>
+        </form>
       </div>
-      <div class="col-md-10 offset-md-2 pt-3">
-        <button type="submit" class="btn btn-success" style="width:100%">Update Client</button>
-      </div>
-      </form>
-      </div>
+    </div>
     </div>
   </div>
 @endsection

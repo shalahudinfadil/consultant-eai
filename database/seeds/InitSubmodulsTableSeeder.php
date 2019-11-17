@@ -12,12 +12,12 @@ class InitSubmodulsTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
 
         \DB::table('submoduls')->delete();
-        
+
         \DB::table('submoduls')->insert(array (
-            0 => 
+            0 =>
             array (
                 'id' => 'MM',
                 'modul_id' => 'LO',
@@ -25,7 +25,7 @@ class InitSubmodulsTableSeeder extends Seeder
                 'created_at' => '2019-10-22 03:43:31',
                 'updated_at' => '2019-10-23 08:27:01',
             ),
-            1 => 
+            1 =>
             array (
                 'id' => 'PP',
                 'modul_id' => 'LO',
@@ -33,7 +33,7 @@ class InitSubmodulsTableSeeder extends Seeder
                 'created_at' => '2019-10-22 03:43:31',
                 'updated_at' => '2019-10-23 08:27:01',
             ),
-            2 => 
+            2 =>
             array (
                 'id' => 'PM',
                 'modul_id' => 'LO',
@@ -41,7 +41,7 @@ class InitSubmodulsTableSeeder extends Seeder
                 'created_at' => '2019-10-22 03:43:31',
                 'updated_at' => '2019-10-23 08:27:01',
             ),
-            3 => 
+            3 =>
             array (
                 'id' => 'PS',
                 'modul_id' => 'LO',
@@ -49,7 +49,7 @@ class InitSubmodulsTableSeeder extends Seeder
                 'created_at' => '2019-10-22 03:43:31',
                 'updated_at' => '2019-10-23 08:31:28',
             ),
-            4 => 
+            4 =>
             array (
                 'id' => 'SD',
                 'modul_id' => 'LO',
@@ -57,7 +57,7 @@ class InitSubmodulsTableSeeder extends Seeder
                 'created_at' => '2019-10-23 08:53:34',
                 'updated_at' => '2019-10-23 08:53:40',
             ),
-            5 => 
+            5 =>
             array (
                 'id' => 'QM',
                 'modul_id' => 'LO',
@@ -65,7 +65,7 @@ class InitSubmodulsTableSeeder extends Seeder
                 'created_at' => '2019-10-23 08:53:49',
                 'updated_at' => '2019-10-23 08:53:49',
             ),
-            6 => 
+            6 =>
             array (
                 'id' => 'GL',
                 'modul_id' => 'FI',
@@ -73,7 +73,7 @@ class InitSubmodulsTableSeeder extends Seeder
                 'created_at' => '2019-10-23 08:55:14',
                 'updated_at' => '2019-10-23 08:55:14',
             ),
-            7 => 
+            7 =>
             array (
                 'id' => 'AP',
                 'modul_id' => 'FI',
@@ -81,7 +81,7 @@ class InitSubmodulsTableSeeder extends Seeder
                 'created_at' => '2019-10-23 08:55:14',
                 'updated_at' => '2019-10-23 08:55:14',
             ),
-            8 => 
+            8 =>
             array (
                 'id' => 'AR',
                 'modul_id' => 'FI',
@@ -89,7 +89,7 @@ class InitSubmodulsTableSeeder extends Seeder
                 'created_at' => '2019-10-23 08:55:14',
                 'updated_at' => '2019-10-23 08:55:14',
             ),
-            9 => 
+            9 =>
             array (
                 'id' => 'SL',
                 'modul_id' => 'FI',
@@ -97,7 +97,7 @@ class InitSubmodulsTableSeeder extends Seeder
                 'created_at' => '2019-10-23 08:55:14',
                 'updated_at' => '2019-10-23 08:55:14',
             ),
-            10 => 
+            10 =>
             array (
                 'id' => 'BL',
                 'modul_id' => 'FI',
@@ -105,7 +105,7 @@ class InitSubmodulsTableSeeder extends Seeder
                 'created_at' => '2019-10-23 08:55:14',
                 'updated_at' => '2019-10-26 14:51:18',
             ),
-            11 => 
+            11 =>
             array (
                 'id' => 'AA',
                 'modul_id' => 'FI',
@@ -113,7 +113,7 @@ class InitSubmodulsTableSeeder extends Seeder
                 'created_at' => '2019-10-26 14:51:18',
                 'updated_at' => '2019-10-26 14:51:18',
             ),
-            12 => 
+            12 =>
             array (
                 'id' => 'FM',
                 'modul_id' => 'FI',
@@ -121,7 +121,7 @@ class InitSubmodulsTableSeeder extends Seeder
                 'created_at' => '2019-10-26 14:51:18',
                 'updated_at' => '2019-10-26 14:51:18',
             ),
-            13 => 
+            13 =>
             array (
                 'id' => 'LC',
                 'modul_id' => 'FI',
@@ -129,7 +129,7 @@ class InitSubmodulsTableSeeder extends Seeder
                 'created_at' => '2019-10-26 14:51:18',
                 'updated_at' => '2019-10-26 14:51:18',
             ),
-            14 => 
+            14 =>
             array (
                 'id' => 'TM',
                 'modul_id' => 'FI',
@@ -137,7 +137,7 @@ class InitSubmodulsTableSeeder extends Seeder
                 'created_at' => '2019-10-26 14:51:18',
                 'updated_at' => '2019-10-26 14:51:18',
             ),
-            15 => 
+            15 =>
             array (
                 'id' => 'CEA',
                 'modul_id' => 'CO',
@@ -145,7 +145,7 @@ class InitSubmodulsTableSeeder extends Seeder
                 'created_at' => '2019-10-26 14:53:20',
                 'updated_at' => '2019-10-26 14:53:20',
             ),
-            16 => 
+            16 =>
             array (
                 'id' => 'CCA',
                 'modul_id' => 'CO',
@@ -153,7 +153,7 @@ class InitSubmodulsTableSeeder extends Seeder
                 'created_at' => '2019-10-26 14:53:20',
                 'updated_at' => '2019-10-26 14:53:20',
             ),
-            17 => 
+            17 =>
             array (
                 'id' => 'IA',
                 'modul_id' => 'CO',
@@ -161,7 +161,7 @@ class InitSubmodulsTableSeeder extends Seeder
                 'created_at' => '2019-10-26 14:53:20',
                 'updated_at' => '2019-10-26 14:53:20',
             ),
-            18 => 
+            18 =>
             array (
                 'id' => 'ABC',
                 'modul_id' => 'CO',
@@ -169,7 +169,7 @@ class InitSubmodulsTableSeeder extends Seeder
                 'created_at' => '2019-10-26 14:53:20',
                 'updated_at' => '2019-10-26 14:53:20',
             ),
-            19 => 
+            19 =>
             array (
                 'id' => 'PC',
                 'modul_id' => 'CO',
@@ -177,7 +177,7 @@ class InitSubmodulsTableSeeder extends Seeder
                 'created_at' => '2019-10-26 14:53:20',
                 'updated_at' => '2019-10-26 14:53:20',
             ),
-            20 => 
+            20 =>
             array (
                 'id' => 'PA',
                 'modul_id' => 'CO',
@@ -185,7 +185,7 @@ class InitSubmodulsTableSeeder extends Seeder
                 'created_at' => '2019-10-26 14:53:20',
                 'updated_at' => '2019-10-26 14:53:20',
             ),
-            21 => 
+            21 =>
             array (
                 'id' => 'PCA',
                 'modul_id' => 'CO',
@@ -193,7 +193,7 @@ class InitSubmodulsTableSeeder extends Seeder
                 'created_at' => '2019-10-26 14:53:20',
                 'updated_at' => '2019-10-26 14:53:20',
             ),
-            22 => 
+            22 =>
             array (
                 'id' => 'OM',
                 'modul_id' => 'CO',
@@ -201,7 +201,7 @@ class InitSubmodulsTableSeeder extends Seeder
                 'created_at' => '2019-10-26 14:53:20',
                 'updated_at' => '2019-10-26 14:53:20',
             ),
-            23 => 
+            23 =>
             array (
                 'id' => 'ML',
                 'modul_id' => 'CO',
@@ -209,24 +209,24 @@ class InitSubmodulsTableSeeder extends Seeder
                 'created_at' => '2019-10-26 14:53:20',
                 'updated_at' => '2019-10-26 14:53:20',
             ),
-            24 => 
+            24 =>
             array (
                 'id' => 'SM',
                 'modul_id' => 'LO',
-                'name' => 'Service management',
+                'name' => 'Service Management',
                 'created_at' => '2019-10-26 14:54:35',
                 'updated_at' => '2019-10-26 14:54:35',
             ),
-            25 => 
+            25 =>
             array (
                 'id' => 'PDM',
                 'modul_id' => 'LO',
-                'name' => 'Product data Management',
+                'name' => 'Product Data Management',
                 'created_at' => '2019-10-26 14:54:35',
                 'updated_at' => '2019-10-26 14:54:35',
             ),
         ));
-        
-        
+
+
     }
 }
