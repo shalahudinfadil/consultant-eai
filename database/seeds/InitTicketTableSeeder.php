@@ -22,7 +22,7 @@ class InitTicketTableSeeder extends Seeder
         $faker = Faker::create('Ticket');
 
         $submoduls = Submodul::all();
-        $pics = Pic::all()->pluck('id')->toArray();
+        $pics = Pic::with('clients')->get();
 
         foreach (range(1,540) as $value) {
           $submodul = $faker->randomElement($submoduls);
@@ -52,11 +52,13 @@ class InitTicketTableSeeder extends Seeder
           $working_at = ($status != 1) ? Carbon::create($seed_date)->addHours(rand(1,72))->toDateTimeString() : null;
           $closing_at = ($status == 3) ? Carbon::create($working_at)->addHours(rand(1,72))->toDateTimeString() : null;
 
+          $pic = $faker->randomElement($pics);
+
           Ticket::create([
             'modul_id' => $submodul->modul_id,
             'submodul_id' => $submodul->id,
-            'client_id' => $faker->numberBetween(1,20),
-            'pic_id' => $faker->randomElement($pics),
+            'client_id' => $pic->clients->id,
+            'pic_id' => $pic->id,
             'title' => $faker->bs,
             'message' => $faker->realText(500,5),
             'priority' => $priority,
