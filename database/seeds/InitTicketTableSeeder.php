@@ -22,7 +22,7 @@ class InitTicketTableSeeder extends Seeder
         $faker = Faker::create('Ticket');
 
         $submoduls = Submodul::all();
-        $pics = Pic::with('clients')->get();
+        $pics = Pic::with('client')->get();
 
         foreach (range(1,540) as $value) {
           $submodul = $faker->randomElement($submoduls);
@@ -57,7 +57,7 @@ class InitTicketTableSeeder extends Seeder
           Ticket::create([
             'modul_id' => $submodul->modul_id,
             'submodul_id' => $submodul->id,
-            'client_id' => $pic->clients->id,
+            'client_id' => $pic->client->id,
             'pic_id' => $pic->id,
             'title' => $faker->bs,
             'message' => $faker->realText(500,5),
