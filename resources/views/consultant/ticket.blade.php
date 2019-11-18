@@ -22,7 +22,7 @@
         @foreach ($tickets as $ticket)
           <tr>
             <td>{{$ticket->ticketNumber()}}</td>
-            <td>{{$ticket->PIC}} - {{$ticket->clients->name}}</td>
+            <td>{{$ticket->pics->name}} - {{$ticket->clients->name}}</td>
             <td>{{$ticket->title}}</td>
             <td>{!! $ticket->priority() !!}</td>
             <td>{{$ticket->status()}}</td>

@@ -6,6 +6,7 @@ use Faker\Factory as Faker;
 use App\Client;
 use App\Submodul;
 use App\Ticket;
+use App\Pic;
 
 class InitTicketTableSeeder extends Seeder
 {
@@ -21,6 +22,7 @@ class InitTicketTableSeeder extends Seeder
         $faker = Faker::create('Ticket');
 
         $submoduls = Submodul::all();
+        $pics = Pic::all()->pluck('id')->toArray();
 
         foreach (range(1,540) as $value) {
           $submodul = $faker->randomElement($submoduls);
@@ -54,7 +56,7 @@ class InitTicketTableSeeder extends Seeder
             'modul_id' => $submodul->modul_id,
             'submodul_id' => $submodul->id,
             'client_id' => $faker->numberBetween(1,20),
-            'PIC' => $faker->firstName." ".$faker->lastName,
+            'pic_id' => $faker->randomElement($pics),
             'title' => $faker->bs,
             'message' => $faker->realText(500,5),
             'priority' => $priority,

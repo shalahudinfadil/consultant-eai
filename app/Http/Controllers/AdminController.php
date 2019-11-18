@@ -11,6 +11,7 @@ use App\Client;
 use App\Role;
 use App\Assignment;
 use App\Ticket;
+use App\Pic;
 
 class AdminController extends Controller
 {
@@ -199,8 +200,9 @@ class AdminController extends Controller
     public function clientOptions($id)
     {
       $client = Client::find($id);
+      $pics = Pic::where('client_id',$id)->get();
 
-      return view('admin.client.options',compact('client'));
+      return view('admin.client.options',compact('client'))->with('pics',$pics);
     }
 
     public function clientUpdate(Request $req, $id)
@@ -219,6 +221,20 @@ class AdminController extends Controller
     {
       Client::destroy($id);
       return redirect('/client')->withSuccess('Data Successfully Deleted');
+    }
+
+    public function clientPicApprove($id)
+    {
+      Pic::where('id',$id)->update(['approved_at' => Carbon::now()->toDateTimeString()]);
+
+      return redirect()->back()->withSuccess('PIC Approved');
+    }
+
+    public function clientPicUnapprove($id)
+    {
+      Pic::where('id',$id)->update(['approved_at' => null]);
+
+      return redirect()->back()->withSuccess('PIC Unapproved');
     }
 
     //Client - end

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ticket extends Model
 {
     protected $fillable = [
-      'modul_id','submodul_id','client_id','PIC','title','message','priority','status','img_links','opening_time','working_time','closing_time',
+      'modul_id','submodul_id','client_id','pic_id','title','message','priority','status','img_links','opening_time','working_time','closing_time',
     ];
 
     protected $casts = [
@@ -27,6 +27,11 @@ class Ticket extends Model
     public function clients()
     {
       return $this->belongsTo('App\Client','client_id');
+    }
+
+    public function pics()
+    {
+      return $this->belongsTo('App\Pic','pic_id');
     }
 
     public function ticketNumber()

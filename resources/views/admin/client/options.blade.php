@@ -41,8 +41,52 @@
             </div>
           </div>
         </form>
+        <hr>
+        <h6 class="text-center">Client Person-In-Contact(s)</h6>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Token</th>
+              <th>Approval</th>
+              <th>Verified</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach ($pics as $pic)
+              <tr>
+                <td>{{$pic->id}}</td>
+                <td>{{$pic->name}}</td>
+                <td>{{$pic->email}}</td>
+                <td>{{$pic->token}}</td>
+                <td>{{($pic->approved_at != null) ? "Yes" : "No" }}</td>
+                <td>{{($pic->verified) ? "Yes" : "No"}}</td>
+                <td>
+                  @if ($pic->verified == null)
+                    <a href="#" class="btn btn-sm btn-secondary disabled">Unverified</a>
+                  @elseif ($pic->approved_at == null && $pic->verified != null)
+                    <a href="/pic/{{$pic->id}}/approve" class="btn btn-sm btn-success">Approve</a>
+                  @else
+                    <a href="/pic/{{$pic->id}}/unapprove" class="btn btn-sm btn-danger">Unapprove</a>
+                  @endif
+                </td>
+              </tr>
+            @endforeach
+          </tbody>
+        </table>
       </div>
     </div>
     </div>
   </div>
 @endsection
+
+@push('script')
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $("table").DataTable();
+    });
+  </script>
+@endpush

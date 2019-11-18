@@ -15,9 +15,13 @@ class CreatePicsTable extends Migration
     {
         Schema::create('pics', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('email');
+            $table->string('email')->unique();
+            $table->string('password');
             $table->string('name');
-            $table->string('client_token');
+            $table->unsignedInteger('client_id');
+            $table->foreign('client_id')->references('id')->on('clients')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('token');
+            $table->boolean('verified')->default(0);
             $table->timestamp('approved_at')->nullable();
             $table->timestamps();
         });

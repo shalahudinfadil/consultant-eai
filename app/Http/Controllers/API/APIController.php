@@ -5,25 +5,31 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Validator;
+use Illuminate\Validation\Rule;
 
 use App\Modul;
 use App\Submodul;
 use App\Ticket;
 use App\Client;
+use App\Pic;
 
 class APIController extends Controller
 {
-
-    public function getModules($modul_id = null)
+    public function __construct()
     {
-      $data = ($modul_id != null) ? Modul::where('id',$modul_id)->with('submoduls')->get() : Modul::with('submoduls')->get();
+      $this->middleware('authapi');
+    }
+
+    public function getModules()
+    {
+      $data = Modul::with('submoduls')->get();
 
       return response()->json(['data' => $data], 200);
     }
 
-    public function getSubmodules($submodul_id = null)
+    public function getSubmodules($modul_id = null)
     {
-      $data = ($submodul_id != null) ? Submodul::where('modul_id',$modul_id)->get() : Submodul::all();
+      $data = ($modul_id != null) ? Submodul::where('modul_id',$modul_id)->get() : Submodul::all();
 
       return response()->json(['data' => $data], 200);
     }
@@ -58,19 +64,41 @@ class APIController extends Controller
       return response()->json(['success' => 'Your ticket #'.$ticket->ticketNumber().' has been submitted!'], 200);
     }
 
-    public function getTicket(Request $req)
+    public function getTickets(Request $req)
     {
-      $allahuakbar = explode("-",$req->ticket_number);
-      $client_id = $allahuakbar[2];
-      $ticket_id = $allahuakbar[3];
+      $tickets = Ticket::where('pic_id', $req->id)->get()->toArray();
 
+      return response()->json(['data' => $tickets]);
+    }
+
+    public function getTicket($id)
+    {
       try {
-        $ticket = Ticket::where('client_id',$client_id)->where('id',$ticket_id)->firstOrFail();
+        $ticket = Ticket::where('id',$id)->firstOrFail();
       } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
         return response()->json(['error' => 'Ticket Not Found'], 404);
       }
 
         return response()->json(['data' => $ticket], 200);
+    }
+
+    public function updateInfo(Request $req)
+    {
+      $validated = Validator::make($req->all(),[
+        'email' => 'required',
+        'name' => 'required',
+      ]);
+
+      if ($validated->fails()) {
+        return response()->json(['message' => $validated->errors()], 404);
+      }
+
+      $pic = Pic::find($req->id);
+      $pic->email = $req->email;
+      $pic->name = $req->name;
+      $pic->save();
+
+      return response()->json(['message' => 'Info Updated', "account" => $pic->only(['email','name','token','client_id'])]);
     }
 
 }

@@ -13,7 +13,7 @@
       </tr>
       <tr>
         <td>Sender</td>
-        <td>{{$ticket->PIC}} ({{$ticket->clients->name}})</td>
+        <td>{{$ticket->pics->name}} ({{$ticket->clients->name}})</td>
       </tr>
       <tr>
         <td>Title</td>

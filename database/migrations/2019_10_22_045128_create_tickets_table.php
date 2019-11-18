@@ -21,7 +21,8 @@ class CreateTicketsTable extends Migration
             $table->foreign('submodul_id')->references('id')->on('submoduls')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedInteger('client_id');
             $table->foreign('client_id')->references('id')->on('clients')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('PIC');
+            $table->unsignedInteger('pic_id');
+            $table->foreign('pic_id')->references('id')->on('pics')->onUpdate('cascade')->onDelete('cascade');
             $table->string('title');
             $table->text('message');
             $table->integer('priority');

@@ -65,6 +65,7 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\IsAdmin::class,
         'check.login' => \App\Http\Middleware\CheckLogin::class,
         '227' => \App\Http\Middleware\PreventBackButton::class,
+        'authapi' => \App\Http\Middleware\CheckAuthAPI::class,
     ];
 
     /**

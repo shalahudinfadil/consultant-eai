@@ -12,4 +12,9 @@ class Client extends Model
     {
       return $this->hasMany('App\Ticket','client_id');
     }
+
+    public function pics()
+    {
+      return $this->hasMany('App\Pic','client_id');
+    }
 }

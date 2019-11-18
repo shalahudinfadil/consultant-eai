@@ -120,6 +120,7 @@ class ConsultantController extends Controller
     {
       $tickets = Ticket::OfSubmodule(Auth::user()->assignments->submodul_id)
                           ->with('clients')
+                          ->with('pics')
                           ->orderBy('created_at','desc')
                           ->get();
 

@@ -47,6 +47,8 @@ Route::middleware(['admin','227'])->group(function(){
   Route::get('/client/{id}/edit','AdminController@clientOptions');
   Route::put('/client/{id}','AdminController@clientUpdate');
   Route::get('/client/{id}/delete','AdminController@clientDelete');
+  Route::Get('/pic/{id}/approve','AdminController@clientPicApprove');
+  Route::Get('/pic/{id}/unapprove','AdminController@clientPicUnapprove');
 
   //Admin - Module
   Route::get('/module', 'AdminController@moduleIndex');

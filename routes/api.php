@@ -17,8 +17,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $user;
 });
 
-Route::get('/modul/{modul_id?}','API\APIController@getModules');
-Route::get('/submodul/{submodul_id?}','API\APIController@getSubmodules');
-Route::get('/client/{client_id?}','API\APIController@getClients');
+Route::post('/modul','API\APIController@getModules');
+Route::post('/submodul/{submodul_id?}','API\APIController@getSubmodules');
+Route::post('/client/{client_id?}','API\APIController@getClients');
 Route::post('/ticket/create','API\APIController@postTicket');
-Route::get('/ticket','API\APIController@getTicket');
+Route::post('/ticket/{id}','API\APIController@getTicket');
+Route::post('/ticket','API\APIController@getTickets');
+
+Route::post('/register','API\AuthController@register');
+Route::post('/login','API\AuthController@login');
+Route::post('/profile/update','API\APIController@updateInfo');
