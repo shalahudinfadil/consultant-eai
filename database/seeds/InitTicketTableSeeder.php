@@ -31,11 +31,15 @@ class InitTicketTableSeeder extends Seeder
 
           foreach (range(1,$images_count) as $imgKey => $img) {
             $images[] = $faker->randomElement([
-              "https://placeimg.com/800/600/tech",
-              "https://placeimg.com/800/600/animals",
-              "https://placeimg.com/800/600/arch",
-              "https://placeimg.com/800/600/nature",
-              "https://placeimg.com/800/600/people"
+              "https://res.cloudinary.com/dufnge8en/image/upload/vih0xi6wlpwbj9clz4flvih0xi6wlpwbj9clz4fl.png",
+              "ohgik2cwvmscdybk21bt",
+              "sx1qqblwhlnvlpz9azss",
+              "mgrnyf26e2y9bgairwao",
+              "tnyi437gfgzgud0jijyu",
+              "awizz6v3h0xz3kwc6fkq",
+              "htq9xsydqitjknrcd8mp",
+              "rshkqs8bfklje28zh75o",
+              "ocmxq1xlyv8r2vnyi3ew",
             ]);
           }
 

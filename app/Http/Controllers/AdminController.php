@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ApprovedMail;
 use App\User;
 use App\Modul;
 use App\Submodul;
@@ -225,16 +227,25 @@ class AdminController extends Controller
 
     public function clientPicApprove($id)
     {
-      Pic::where('id',$id)->update(['approved_at' => Carbon::now()->toDateTimeString()]);
+      $pic = Pic::find($id);
+      $pic->approved_at = Carbon::now()->toDateTimeString();
+      $pic->save();
 
-      return redirect()->back()->withSuccess('PIC Approved');
+      $data = [
+        'name' => $pic->name,
+        'email' => $pic->email,
+      ];
+
+      Mail::to($pic->email)->send(new ApprovedMail($data));
+
+      return redirect('/client')->withSuccess('PIC Approved');
     }
 
     public function clientPicUnapprove($id)
     {
       Pic::where('id',$id)->update(['approved_at' => null]);
 
-      return redirect()->back()->withSuccess('PIC Unapproved');
+      return redirect('/client')->withSuccess('PIC Unapproved');
     }
 
     //Client - end
@@ -338,4 +349,8 @@ class AdminController extends Controller
       return redirect('/settings')->withSuccess('Password has been changed!');
 
     }
+
+    //Setting - END
+
+
 }

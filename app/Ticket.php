@@ -21,7 +21,7 @@ class Ticket extends Model
 
     public function submoduls()
     {
-      return $this->belongsTo('App\Submodul','modul_id');
+      return $this->belongsTo('App\Submodul','submodul_id');
     }
 
     public function clients()

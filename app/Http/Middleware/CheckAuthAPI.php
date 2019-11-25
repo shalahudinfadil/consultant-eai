@@ -25,7 +25,7 @@ class CheckAuthAPI
         ]);
 
         if ($validator->fails()) {
-          return response()->json(['message' => 'Invalid / Malformed Credential'], 403);
+          return response()->json(['message' => $validator->errors()], 403);
         }
 
         $pic = Pic::find($request->id);

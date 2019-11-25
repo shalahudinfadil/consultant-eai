@@ -26,15 +26,19 @@
       <tr>
         <td>Attached Image(s)</td>
         <td>
-          <div class="row justify-content-left">
-            @foreach ($ticket->img_links as $key => $img_link)
-              <div class="col-md-3 p-3">
-                <div class="card">
-                  <a data-fancybox="gallery" href="{{$img_link}}"><img class="img-thumbnail" src="{{$img_link}}"></a>
+          @if ($ticket->img_links != null)
+            <div class="row justify-content-left">
+              @foreach ($ticket->img_links as $key => $img_link)
+                <div class="col-md-3 p-3">
+                  <div class="card">
+                    <a data-fancybox="gallery" href="{{\Cloudder::secureShow($img_link)}}"><img class="img-thumbnail" src="{{\Cloudder::secureShow($img_link)}}"></a>
+                  </div>
                 </div>
-              </div>
-            @endforeach
-          </div>
+              @endforeach
+            </div>
+          @else
+            No Image Attached
+          @endif
         </td>
       </tr>
     </table>

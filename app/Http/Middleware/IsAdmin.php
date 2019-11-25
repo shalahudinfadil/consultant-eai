@@ -19,7 +19,7 @@ class IsAdmin
       if (Auth::check() && Auth::user()->role_id == 1) {
         return $next($request);
       } else {
-        return redirect()->back()->withWarning('Admin-Only Area');
+        return redirect('/')->withWarning('Admin-Only Area');
       }
     }
 }

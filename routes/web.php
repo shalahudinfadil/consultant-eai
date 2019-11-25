@@ -19,7 +19,7 @@ Route::get('/', function () {
 Route::post('/auth', 'Auth\LoginController@authenticate');
 Route::get('/logout', 'Auth\LoginController@logout')->middleware('227');
 
-Route::middleware(['admin','227'])->group(function(){
+Route::middleware(['admin'])->group(function(){
 
   Route::post('/upload','Auth\LoginController@uploadImages');
   Route::get('/show','Auth\LoginController@show');
@@ -62,7 +62,7 @@ Route::middleware(['admin','227'])->group(function(){
   Route::post('/admin/settings/{eid}','AdminController@settingsUpdatePassword');
 });
 
-Route::middleware(['check.login','227'])->group(function(){
+Route::middleware(['check.login'])->group(function(){
   //Prompt change password -First Time Login
   Route::view('/promptpassword','promptpass');
   Route::post('/promptpassword','Auth\LoginController@promptPassword');
