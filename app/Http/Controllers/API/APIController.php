@@ -58,8 +58,11 @@ class APIController extends Controller
       }
 
       $input = $req->all();
+      $input['img_links'] = json_decode($req->img_links);
       $input['status'] = 1;
       $input['pic_id'] = $req->id;
+
+      //return response()->json([$input]);
       $ticket = Ticket::create($input);
 
       return response()->json(['success' => 'Your ticket #'.$ticket->ticketNumber().' has been submitted!'], 200);

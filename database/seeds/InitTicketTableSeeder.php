@@ -31,7 +31,6 @@ class InitTicketTableSeeder extends Seeder
 
           foreach (range(1,$images_count) as $imgKey => $img) {
             $images[] = $faker->randomElement([
-              "https://res.cloudinary.com/dufnge8en/image/upload/vih0xi6wlpwbj9clz4flvih0xi6wlpwbj9clz4fl.png",
               "ohgik2cwvmscdybk21bt",
               "sx1qqblwhlnvlpz9azss",
               "mgrnyf26e2y9bgairwao",
