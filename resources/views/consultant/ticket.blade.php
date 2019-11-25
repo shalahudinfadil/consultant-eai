@@ -15,25 +15,9 @@
           <th>Priority</th>
           <th>Status</th>
           <th>Timestamp</th>
-          <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        @foreach ($tickets as $ticket)
-          <tr>
-            <td>{{$ticket->ticketNumber()}}</td>
-            <td>{{$ticket->pics->name}} - {{$ticket->clients->name}}</td>
-            <td>{{$ticket->title}}</td>
-            <td>{!! $ticket->priority() !!}</td>
-            <td>{{$ticket->status()}}</td>
-            <td>{{$ticket->created_at}}</td>
-            <td>
-              <a href="/ticket/{{$ticket->id}}" class="btn btn-sm btn-block btn-primary">
-                <i class="fa fa-eye" aria-hidden="true"></i> View
-              </a>
-            </td>
-          </tr>
-        @endforeach
       </tbody>
       <tfoot>
         <tr>
@@ -51,8 +35,44 @@
 
 @push('script')
   <script type="text/javascript">
+    var table = $('#ticketTable');
+    var timeout;
+
+  function getTickets() {
+    $.get('/ticketdata', function(resp){
+      table.clear().draw();
+      table.rows.add(resp).draw();
+      timeout = setTimeout(function () {
+        getTickets()
+      }, 5000);
+    });
+  }
+
     $(document).ready(function(){
-      $('table').DataTable();
+      table = $('table').DataTable({
+        serverSide: false,
+        processing: true,
+        paging: true,
+        language: {
+            emptyTable: "No Ticket Found"
+        },
+        data: [],
+        columns: [
+          {data: 'id'},
+          {data: 'client_full'},
+          {data: 'title'},
+          {data: 'priority'},
+          {data: 'status'},
+          {data: 'created_at'},
+        ]
+      });
+
+      $('table').on('click', 'tbody tr', function() {
+        var id = table.row(this).data()['id'];
+        window.location.href = '/ticket/'+id;
+      });
+
+      getTickets();
     });
   </script>
 @endpush

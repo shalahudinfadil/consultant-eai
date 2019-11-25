@@ -75,9 +75,12 @@ Route::middleware(['check.login'])->group(function(){
   Route::get('/overview/chartdata','ConsultantController@getChartData');
 
   //Consultant routes - Ticket
-  Route::get('/ticket','ConsultantController@ticketIndex');
+  Route::view('/ticket','consultant/ticket');
   Route::get('/ticket/{id}','ConsultantController@ticketView');
   Route::get('/ticket/{id}/changestatus','ConsultantController@ticketChangeStatus');
+
+  //Consultant- AJAX Ticket
+  Route::get('/ticketdata','ConsultantController@ticketIndex');
 
   //Consultant routes - Settings
   Route::view('/consultant/settings','consultant.settings');

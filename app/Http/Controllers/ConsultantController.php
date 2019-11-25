@@ -123,8 +123,13 @@ class ConsultantController extends Controller
                           ->with('pics')
                           ->orderBy('created_at','desc')
                           ->get();
+      foreach ($tickets as $key => $ticket) {
+        $ticket->client_full = $ticket->pics->name.' ('.$ticket->clients->name.')';
+        $ticket->priority = $ticket->priority();
+        $ticket->status = $ticket->status();
+      }
 
-      return view('consultant.ticket', compact('tickets'));
+      return $tickets->toArray();
     }
 
     public function ticketView($id)

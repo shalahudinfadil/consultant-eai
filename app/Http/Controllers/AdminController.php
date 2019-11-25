@@ -61,15 +61,23 @@ class AdminController extends Controller
         $ticketClientModule['label'][] = $modul->name;
       }
 
+      $filter = $tickets->groupby('client_id')->toArray();
       foreach ($clients as $key => $client) {
         $ticketClientModule['labels'][] = $client->name;
         $ticketClientPriority['labels'][] = $client->name;
-        $filtered = $tickets->groupby('client_id')[++$key];
-        foreach (range(1,3) as $counter) {
-          $ticketClientModule['data'][$counter][] =
-            (!empty($filtered->groupby('status')[$counter])) ? $filtered->groupby('status')[$counter]->count() : 0;
-          $ticketClientPriority['data'][$counter][] =
-            (!empty($filtered->groupby('priority')[$counter])) ? $filtered->groupby('priority')[$counter]->count() : 0;
+        if (array_key_exists($client->id,$filter)) {
+          $filtered = collect($filter[$client->id]);
+          foreach (range(1,3) as $counter) {
+            $ticketClientModule['data'][$counter][] =
+              (!empty($filtered->groupby('status')[$counter])) ? $filtered->groupby('status')[$counter]->count() : 0;
+            $ticketClientPriority['data'][$counter][] =
+              (!empty($filtered->groupby('priority')[$counter])) ? $filtered->groupby('priority')[$counter]->count() : 0;
+          }
+        } else {
+          foreach (range(1,3) as $counter) {
+            $ticketClientModule['data'][$counter][] = 0;
+            $ticketClientPriority['data'][$counter][] = 0;
+          }
         }
       }
 
